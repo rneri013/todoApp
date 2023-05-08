@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "br.com.todoApp";
+option java_outer_classname = "TodoApp";
+option objc_class_prefix = "HLW";
+
+package br.com.todoApp;
+
+service TodoAppService {
+  rpc send (TodoAppRequest) returns (TodoAppReply) {}
+}
+
+message TodoAppRequest {
+  string name = 1;
+}
+
+message TodoAppReply {
+  string message = 1;
+}
