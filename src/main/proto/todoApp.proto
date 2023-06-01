@@ -2,19 +2,59 @@ syntax = "proto3";
 
 option java_multiple_files = true;
 option java_package = "br.com.todoApp";
-option java_outer_classname = "TodoApp";
+option java_outer_classname = "GrpcTodoApp";
 option objc_class_prefix = "HLW";
 
 package br.com.todoApp;
 
-service TodoAppService {
-  rpc send (TodoAppRequest) returns (TodoAppReply) {}
+service GrpcServerService {
+    rpc CreateCard(CreateCardInput) returns (ResponseDefault) {}
+    rpc DeleteCard(CardId) returns (EmptyResponse) {}
+    rpc UpdateCard(UpdateCardInput) returns (EmptyResponse) {}
+    rpc CreateStatus(CreateStatusCardInput) returns (ResponseDefault) {}
+    rpc UpdateStatus(UpdateStatusCardInput) returns (ResponseDefault) {}
 }
 
-message TodoAppRequest {
-  string name = 1;
+message EmptyResponse {}
+
+message CardId {
+  int32 id = 1;
 }
 
-message TodoAppReply {
-  string message = 1;
+message CreateCardInput {
+  int32 id = 1;
+  string title = 2;
+  string description = 3;
+  string status = 4;
+}
+
+message UpdateCardInput {
+  int32 id = 1;
+  string title = 2;
+  string description = 3;
+  string status = 4;
+}
+
+message CardOutput {
+  int32 id = 1;
+  string title = 2;
+  string description = 3;
+  string status = 4;
+}
+
+message ResponseDefault {
+  string status = 1;
+  string message = 2;
+}
+
+message CreateStatusCardInput {
+  int32 id = 1;
+  string status = 2;
+  string description = 3;
+}
+
+message UpdateStatusCardInput {
+  int32 id = 1;
+  string status = 2;
+  string description = 3;
 }
